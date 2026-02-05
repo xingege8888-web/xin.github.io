@@ -1,12 +1,450 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>长宁网络科技</title>
+    <title>四兄弟 - 缘起职场，情越山海</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- 自定义配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brother: {
+                            main: '#2C5282',    // 藏蓝（主色，代表沉稳）
+                            accent: '#E53E3E',  // 赤红（辅助色，代表热血）
+                            light: '#F7FAFC',   // 浅灰（背景）
+                            dark: '#1A202C',    // 深灰（文本）
+                            warm: '#ED8936',    // 暖橙（点缀）
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            }
+            .transition-custom {
+                transition: all 0.4s ease-in-out;
+            }
+            .section-padding {
+                padding: clamp(4rem, 10vw, 8rem) 0;
+            }
+            .bg-gradient-brother {
+                background: linear-gradient(135deg, #2C5282 0%, #1A365D 100%);
+            }
+        }
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* 导航栏滚动效果 */
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        /* 时间线样式 */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #2C5282;
+            border: 4px solid #F7FAFC;
+        }
+        .timeline-line {
+            position: absolute;
+            left: -30px;
+            top: 20px;
+            bottom: -20px;
+            width: 2px;
+            background-color: #E2E8F0;
+        }
+        .timeline-item:last-child .timeline-line {
+            display: none;
+        }
+    </style>
 </head>
-<body>
-    <div>你好</div>
-</body>
+<body class="bg-brother-light text-brother-dark font-sans antialiased">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 py-5 transition-custom">
+        <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold text-brother-main">四兄弟</a>
+            <!-- 桌面导航 -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#story" class="font-medium hover:text-brother-main transition-custom">相识之路</a>
+                <a href="#members" class="font-medium hover:text-brother-main transition-custom">兄弟档案</a>
+                <a href="#moments" class="font-medium hover:text-brother-main transition-custom">珍贵瞬间</a>
+                <a href="#belief" class="font-medium hover:text-brother-main transition-custom">我们的约定</a>
+            </nav>
+            <!-- 移动端菜单按钮 -->
+            <button id="menuBtn" class="md:hidden text-brother-dark text-xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="md:hidden hidden bg-white absolute w-full top-full left-0 shadow-lg py-4 px-4">
+            <nav class="flex flex-col space-y-4">
+                <a href="#story" class="font-medium hover:text-brother-main transition-custom">相识之路</a>
+                <a href="#members" class="font-medium hover:text-brother-main transition-custom">兄弟档案</a>
+                <a href="#moments" class="font-medium hover:text-brother-main transition-custom">珍贵瞬间</a>
+                <a href="#belief" class="font-medium hover:text-brother-main transition-custom">我们的约定</a>
+            </nav>
+        </div>
+    </header>
 
+    <!-- 英雄区（首屏） -->
+    <section id="hero" class="min-h-screen flex items-center pt-20 bg-gradient-brother text-white">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-[clamp(2.8rem,8vw,5rem)] font-bold leading-tight text-shadow mb-6">
+                    缘起职场 <span class="text-brother-warm">情越山海</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto">
+                    伟哥、大军、大路、指南针，四个原本陌路的人，因同一家公司相遇，因志同道合相知，最终成为一辈子的兄弟。
+                </p>
+                <a href="#story" class="inline-block px-10 py-4 bg-brother-accent text-white rounded-lg font-medium hover:bg-brother-accent/90 transition-custom">
+                    走进我们的故事
+                </a>
+                <!-- 装饰元素 -->
+                <div class="mt-20 animate-bounce">
+                    <i class="fas fa-chevron-down text-white/70 text-2xl"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 相识之路（时间线） -->
+    <section id="story" class="section-padding bg-white">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4">相识之路</h2>
+                <div class="w-20 h-1 bg-brother-main mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    从互不相识的陌生人，到同一家公司的同事，再到无话不谈的兄弟，每一步都值得珍藏。
+                </p>
+            </div>
+
+            <div class="relative max-w-3xl mx-auto pl-16 md:pl-24">
+                <!-- 时间线item 1 -->
+                <div class="timeline-item relative mb-16">
+                    <h3 class="text-2xl font-bold text-brother-main mb-3">各自前行 · 未曾谋面</h3>
+                    <p class="text-gray-600 mb-2">2020年 夏</p>
+                    <p class="text-gray-700">
+                        伟哥在南方打拼，大军扎根本地，大路刚换了新城市，指南针还在为职业方向迷茫。四人散落在不同的城市，走着各自的人生轨迹，从未想过彼此的人生会交汇。
+                    </p>
+                    <div class="timeline-line"></div>
+                </div>
+
+                <!-- 时间线item 2 -->
+                <div class="timeline-item relative mb-16">
+                    <h3 class="text-2xl font-bold text-brother-main mb-3">职场相遇 · 初见如故</h3>
+                    <p class="text-gray-600 mb-2">2021年 春</p>
+                    <p class="text-gray-700">
+                        机缘巧合下，四人先后加入了同一家科技公司——有的是技术岗，有的是运营岗，有的是市场岗。第一次部门聚餐，四人坐在一桌，聊起天来竟毫无隔阂，像是认识了很久的朋友。
+                    </p>
+                    <div class="timeline-line"></div>
+                </div>
+
+                <!-- 时间线item 3 -->
+                <div class="timeline-item relative mb-16">
+                    <h3 class="text-2xl font-bold text-brother-main mb-3">并肩作战 · 渐成知己</h3>
+                    <p class="text-gray-600 mb-2">2021年 冬</p>
+                    <p class="text-gray-700">
+                        公司启动重点项目，四人被分到同一个项目组。连续三个月的加班、攻克难题的深夜、分享成功的喜悦，让他们在并肩作战中建立了深厚的信任，彼此的了解也越来越深。
+                    </p>
+                    <div class="timeline-line"></div>
+                </div>
+
+                <!-- 时间线item 4 -->
+                <div class="timeline-item relative mb-16">
+                    <h3 class="text-2xl font-bold text-brother-main mb-3">义结金兰 · 成为兄弟</h3>
+                    <p class="text-gray-600 mb-2">2022年 中秋</p>
+                    <p class="text-gray-700">
+                        中秋夜的聚会上，四人举杯立誓，以兄弟相称。没有繁文缛节，只有真心实意——不管未来顺境逆境，都彼此扶持，这份情谊，无关利益，只关真心。
+                    </p>
+                    <div class="timeline-line"></div>
+                </div>
+
+                <!-- 时间线item 5 -->
+                <div class="timeline-item relative">
+                    <h3 class="text-2xl font-bold text-brother-main mb-3">步履不停 · 情谊长存</h3>
+                    <p class="text-gray-600 mb-2">2022年 - 至今</p>
+                    <p class="text-gray-700">
+                        有人换了工作，有人搬了新家，有人经历人生起伏，但四人的联系从未间断。逢年过节的相聚，遇到困难时的伸手，这份职场结缘的兄弟情，早已跨越时间和距离，成为彼此人生中最珍贵的财富。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 兄弟档案 -->
+    <section id="members" class="section-padding bg-brother-light">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4">兄弟档案</h2>
+                <div class="w-20 h-1 bg-brother-main mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    四个性格各异的人，因缘分相聚，因真诚相守。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 伟哥 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://picsum.photos/800/800?random=1" alt="伟哥" class="w-full h-full object-cover group-hover:scale-105 transition-custom">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold mb-2 text-brother-main">伟哥</h3>
+                        <p class="text-brother-warm font-medium mb-4">大哥 · 沉稳担当</p>
+                        <p class="text-gray-600 mb-6">
+                            团队里的老大哥，遇事冷静，总能在关键时刻稳住局面。性格温和，是兄弟们的“主心骨”，不管谁遇到难处，他都会第一时间伸出援手。
+                        </p>
+                        <div class="flex justify-center space-x-4 text-gray-500">
+                            <span><i class="fas fa-star mr-1"></i>靠谱</span>
+                            <span><i class="fas fa-heart mr-1"></i>仗义</span>
+                            <span><i class="fas fa-brain mr-1"></i>睿智</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 大军 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://picsum.photos/800/800?random=2" alt="大军" class="w-full h-full object-cover group-hover:scale-105 transition-custom">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold mb-2 text-brother-main">大军</h3>
+                        <p class="text-brother-warm font-medium mb-4">二哥 · 热情仗义</p>
+                        <p class="text-gray-600 mb-6">
+                            性格外向，热情似火，是团队里的“气氛担当”。重情重义，为兄弟两肋插刀，不管是工作还是生活，都能给身边的人带来满满的正能量。
+                        </p>
+                        <div class="flex justify-center space-x-4 text-gray-500">
+                            <span><i class="fas fa-fire mr-1"></i>热情</span>
+                            <span><i class="fas fa-handshake mr-1"></i>仗义</span>
+                            <span><i class="fas fa-laugh-beam mr-1"></i>有趣</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 大路 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://picsum.photos/800/800?random=3" alt="大路" class="w-full h-full object-cover group-hover:scale-105 transition-custom">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold mb-2 text-brother-main">大路</h3>
+                        <p class="text-brother-warm font-medium mb-4">三哥 · 踏实肯干</p>
+                        <p class="text-gray-600 mb-6">
+                            做事踏实，从不耍滑头，是团队里的“实干派”。话不多但行动力强，答应的事一定会做到，默默为兄弟付出，是最值得托付的人。
+                        </p>
+                        <div class="flex justify-center space-x-4 text-gray-500">
+                            <span><i class="fas fa-hammer mr-1"></i>实干</span>
+                            <span><i class="fas fa-lock mr-1"></i>可靠</span>
+                            <span><i class="fas fa-road mr-1"></i>坚定</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 指南针 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://picsum.photos/800/800?random=4" alt="指南针" class="w-full h-full object-cover group-hover:scale-105 transition-custom">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold mb-2 text-brother-main">指南针</h3>
+                        <p class="text-brother-warm font-medium mb-4">四弟 · 灵动聪慧</p>
+                        <p class="text-gray-600 mb-6">
+                            年纪最小，脑子转得快，是团队里的“智多星”。思维活跃，总能想出新奇的点子，虽然偶尔调皮，但关键时刻从不含糊，是兄弟们的“开心果”。
+                        </p>
+                        <div class="flex justify-center space-x-4 text-gray-500">
+                            <span><i class="fas fa-lightbulb mr-1"></i>聪慧</span>
+                            <span><i class="fas fa-smile mr-1"></i>活泼</span>
+                            <span><i class="fas fa-compass mr-1"></i>机敏</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 珍贵瞬间 -->
+    <section id="moments" class="section-padding bg-white">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4">珍贵瞬间</h2>
+                <div class="w-20 h-1 bg-brother-main mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    那些一起笑、一起拼、一起走过的日子，都成了最珍贵的回忆。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <img src="https://picsum.photos/800/600?random=10" alt="第一次部门聚餐" class="w-full h-64 object-cover group-hover:scale-105 transition-custom">
+                    <div class="p-4 bg-gray-50">
+                        <p class="text-gray-700 font-medium">2021年春 · 第一次部门聚餐</p>
+                        <p class="text-gray-500 text-sm">四人第一次正式相识，一见如故</p>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <img src="https://picsum.photos/800/600?random=11" alt="项目庆功宴" class="w-full h-64 object-cover group-hover:scale-105 transition-custom">
+                    <div class="p-4 bg-gray-50">
+                        <p class="text-gray-700 font-medium">2021年冬 · 项目庆功宴</p>
+                        <p class="text-gray-500 text-sm">并肩攻克难题，举杯庆祝胜利</p>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <img src="https://picsum.photos/800/600?random=12" alt="中秋结拜" class="w-full h-64 object-cover group-hover:scale-105 transition-custom">
+                    <div class="p-4 bg-gray-50">
+                        <p class="text-gray-700 font-medium">2022年中秋 · 义结金兰</p>
+                        <p class="text-gray-500 text-sm">举杯立誓，正式结为兄弟</p>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <img src="https://picsum.photos/800/600?random=13" alt="户外团建" class="w-full h-64 object-cover group-hover:scale-105 transition-custom">
+                    <div class="p-4 bg-gray-50">
+                        <p class="text-gray-700 font-medium">2023年夏 · 户外团建</p>
+                        <p class="text-gray-500 text-sm">一起爬山，一起看风景</p>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <img src="https://picsum.photos/800/600?random=14" alt="春节相聚" class="w-full h-64 object-cover group-hover:scale-105 transition-custom">
+                    <div class="p-4 bg-gray-50">
+                        <p class="text-gray-700 font-medium">2024年春节 · 兄弟相聚</p>
+                        <p class="text-gray-500 text-sm">无论多忙，春节总要聚一聚</p>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-custom group">
+                    <img src="https://picsum.photos/800/600?random=15" alt="未来可期" class="w-full h-64 object-cover group-hover:scale-105 transition-custom">
+                    <div class="p-4 bg-gray-50">
+                        <p class="text-gray-700 font-medium">未来 · 情谊长存</p>
+                        <p class="text-gray-500 text-sm">时光不老，我们不散</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 我们的约定 -->
+    <section id="belief" class="section-padding bg-gradient-brother text-white">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4">我们的约定</h2>
+                <div class="w-20 h-1 bg-white mx-auto mb-6"></div>
+                <p class="text-lg text-white/80 max-w-2xl mx-auto">
+                    这是我们对彼此的承诺，也是对这份情谊的守护。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 text-center hover:bg-white/20 transition-custom">
+                    <div class="text-4xl mb-6"><i class="fas fa-handshake"></i></div>
+                    <h3 class="text-xl font-bold mb-3">彼此扶持</h3>
+                    <p class="text-white/80">
+                        顺境时互相提醒，逆境时互相支撑，不抛弃，不放弃。
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 text-center hover:bg-white/20 transition-custom">
+                    <div class="text-4xl mb-6"><i class="fas fa-talk"></i></div>
+                    <h3 class="text-xl font-bold mb-3">坦诚相待</h3>
+                    <p class="text-white/80">
+                        有话直说，不藏私心，真心换真心，永远不玩虚的。
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 text-center hover:bg-white/20 transition-custom">
+                    <div class="text-4xl mb-6"><i class="fas fa-clock"></i></div>
+                    <h3 class="text-xl font-bold mb-3">常聚常聊</h3>
+                    <p class="text-white/80">
+                        再忙也要抽时间相聚，不管走多远，联系不能断。
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 text-center hover:bg-white/20 transition-custom">
+                    <div class="text-4xl mb-6"><i class="fas fa-infinity"></i></div>
+                    <h3 class="text-xl font-bold mb-3">情谊长久</h3>
+                    <p class="text-white/80">
+                        不因时间疏远，不因距离变淡，做一辈子的兄弟。
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <p class="text-2xl font-kai italic text-white/90">
+                    “时光不老，我们不散；前路漫漫，有你相伴。”
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-brother-dark text-white py-12">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2">四兄弟</h3>
+                    <p class="text-gray-400">缘起职场，情越山海</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#story" class="text-gray-400 hover:text-white transition-custom">相识之路</a>
+                    <a href="#members" class="text-gray-400 hover:text-white transition-custom">兄弟档案</a>
+                    <a href="#moments" class="text-gray-400 hover:text-white transition-custom">珍贵瞬间</a>
+                    <a href="#belief" class="text-gray-400 hover:text-white transition-custom">我们的约定</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 四兄弟 | 这份情谊，历久弥新</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            // 切换图标
+            const icon = menuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+
+        // 点击移动端菜单链接后关闭菜单
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            });
+        });
+    </script>
+</body>
 </html>
